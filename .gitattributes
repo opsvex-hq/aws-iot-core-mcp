@@ -1,0 +1,9 @@
+# Prettier is configured with endOfLine: lf, so the repository stores and checks
+# out LF everywhere. Without this, a clone on Windows gets CRLF and
+# `npm run format:check` fails on a pristine checkout.
+* text=auto eol=lf
+
+# Never normalise binaries.
+*.png binary
+*.jpg binary
+*.ico binary

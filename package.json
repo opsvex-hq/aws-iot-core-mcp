@@ -1,0 +1,80 @@
+{
+  "name": "aws-iot-core-mcp",
+  "version": "0.1.0",
+  "description": "Read-only MCP server for AWS IoT Core. Inspect things, device shadows, topic rules and certificates from an AI assistant — without granting write access to your fleet.",
+  "license": "MIT",
+  "author": "Opsvex (https://opsvex.com)",
+  "homepage": "https://github.com/opsvex-hq/aws-iot-core-mcp#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/opsvex-hq/aws-iot-core-mcp.git"
+  },
+  "bugs": {
+    "url": "https://github.com/opsvex-hq/aws-iot-core-mcp/issues"
+  },
+  "keywords": [
+    "mcp",
+    "model-context-protocol",
+    "aws",
+    "aws-iot",
+    "aws-iot-core",
+    "iot",
+    "device-shadow",
+    "observability",
+    "read-only"
+  ],
+  "type": "module",
+  "engines": {
+    "node": ">=20.19.0"
+  },
+  "bin": {
+    "aws-iot-core-mcp": "dist/index.js"
+  },
+  "main": "./dist/server.js",
+  "types": "./dist/server.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/server.d.ts",
+      "import": "./dist/server.js"
+    },
+    "./http": {
+      "types": "./dist/http.d.ts",
+      "import": "./dist/http.js"
+    }
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE",
+    "CHANGELOG.md"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "dev": "tsx src/index.ts",
+    "dev:http": "tsx src/http.ts",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "lint": "oxlint src tests",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage",
+    "verify": "npm run format:check && npm run lint && npm run typecheck && npm run test",
+    "prepublishOnly": "npm run verify && npm run build"
+  },
+  "dependencies": {
+    "@aws-sdk/client-iot": "^3.1131.0",
+    "@aws-sdk/client-iot-data-plane": "^3.1131.0",
+    "@modelcontextprotocol/sdk": "^1.30.0",
+    "zod": "^4.6.2"
+  },
+  "devDependencies": {
+    "@types/node": "^22.20.2",
+    "@vitest/coverage-v8": "^5.0.0",
+    "oxlint": "^1.82.0",
+    "prettier": "^3.9.6",
+    "tsx": "^4.23.13",
+    "typescript": "^6.0.3",
+    "vitest": "^5.0.0"
+  }
+}

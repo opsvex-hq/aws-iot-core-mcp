@@ -1,0 +1,71 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  verify:
+    name: verify (node ${{ matrix.node }})
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        node: ['20.19', '22', '24']
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node }}
+          cache: npm
+
+      - name: Install (locked)
+        run: npm ci
+
+      - name: Check formatting
+        run: npm run format:check
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Typecheck
+        run: npm run typecheck
+
+      - name: Test with coverage
+        run: npm run test:coverage
+
+      - name: Build
+        run: npm run build
+
+      # The CLI is the first thing a user touches. These three calls need no AWS
+      # credentials and catch a broken entry point that unit tests cannot see.
+      - name: Smoke test the CLI
+        run: |
+          node dist/index.js --version
+          AWS_REGION=us-east-1 node dist/index.js --list-tools
+          AWS_REGION=us-east-1 AWS_IOT_MCP_TOOLS=list_things node dist/index.js --list-tools | grep -q '^\[off\] get_device_shadow'
+
+      - name: A missing region must fail loudly, not start
+        run: |
+          if node dist/index.js --list-tools; then
+            echo "Expected a non-zero exit with no AWS_REGION set" >&2
+            exit 1
+          fi
+
+      - name: Upload coverage
+        if: matrix.node == '22'
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage
+          path: coverage/
+          retention-days: 7

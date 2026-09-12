@@ -1,0 +1,27 @@
+{
+  "$schema": "./node_modules/oxlint/configuration_schema.json",
+  "categories": {
+    "correctness": "error",
+    "suspicious": "error",
+    "perf": "warn",
+    "pedantic": "off"
+  },
+  "rules": {
+    "no-console": "off",
+    "typescript/no-explicit-any": "error",
+    "typescript/consistent-type-imports": "error",
+    "eslint/no-unused-vars": ["error", { "argsIgnorePattern": "^_" }],
+    "eslint/no-await-in-loop": "off",
+    "unicorn/prefer-set-has": "off"
+  },
+  "ignorePatterns": ["dist", "coverage", "node_modules"],
+  "overrides": [
+    {
+      "files": ["tests/**/*.ts"],
+      "rules": {
+        "typescript/no-explicit-any": "off",
+        "eslint/no-control-regex": "off"
+      }
+    }
+  ]
+}

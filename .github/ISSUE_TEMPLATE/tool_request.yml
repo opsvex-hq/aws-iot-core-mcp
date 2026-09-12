@@ -1,0 +1,41 @@
+name: New read-only tool
+description: Propose a tool that answers an operational question
+labels: [enhancement]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Read-only proposals only. Anything that writes, publishes, deletes or
+        modifies AWS state is declined by design — see
+        [ADR 0002](../../docs/adr/0002-read-only-by-construction.md).
+
+  - type: textarea
+    id: question
+    attributes:
+      label: The question an operator is trying to answer
+      description: Phrase it the way someone says it at 2 a.m., not as an API call.
+      placeholder: Which gateways stopped reporting since the firmware rollout?
+    validations:
+      required: true
+
+  - type: textarea
+    id: today
+    attributes:
+      label: How you answer it today
+      description: Which console screens or CLI calls, and how long it takes.
+    validations:
+      required: true
+
+  - type: input
+    id: apis
+    attributes:
+      label: AWS read APIs it would need
+      placeholder: iot:ListJobExecutionsForThing
+
+  - type: checkboxes
+    id: confirm
+    attributes:
+      label: Confirm
+      options:
+        - label: This tool only reads. It changes nothing in AWS.
+          required: true

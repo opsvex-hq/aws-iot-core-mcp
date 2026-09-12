@@ -1,0 +1,28 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "IotCoreControlPlaneReads",
+      "Effect": "Allow",
+      "Action": [
+        "iot:ListThings",
+        "iot:DescribeThing",
+        "iot:ListThingGroupsForThing",
+        "iot:SearchIndex",
+        "iot:GetIndexingConfiguration",
+        "iot:ListTopicRules",
+        "iot:GetTopicRule",
+        "iot:DescribeEndpoint",
+        "iot:ListThingPrincipals",
+        "iot:DescribeCertificate"
+      ],
+      "Resource": "*"
+    },
+    {
+      "Sid": "IotCoreDataPlaneReads",
+      "Effect": "Allow",
+      "Action": ["iot:GetThingShadow", "iot:ListNamedShadowsForThing"],
+      "Resource": "arn:aws:iot:REGION:ACCOUNT_ID:thing/*"
+    }
+  ]
+}

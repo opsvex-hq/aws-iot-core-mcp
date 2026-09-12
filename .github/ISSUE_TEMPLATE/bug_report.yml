@@ -1,0 +1,64 @@
+name: Bug report
+description: Something behaved differently than documented
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        A report from a real AWS account is the most valuable issue this project
+        can receive — every AWS interaction in the test suite is a fake.
+
+        **Please redact before pasting.** Thing names, site attributes and shadow
+        contents often identify a real customer.
+
+  - type: input
+    id: version
+    attributes:
+      label: Version
+      placeholder: 0.1.0 (or a commit sha)
+    validations:
+      required: true
+
+  - type: dropdown
+    id: transport
+    attributes:
+      label: Transport
+      options: [stdio, streamable HTTP, both]
+    validations:
+      required: true
+
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened
+      description: What you asked for, what came back, and what you expected instead.
+    validations:
+      required: true
+
+  - type: textarea
+    id: repro
+    attributes:
+      label: Reproduction
+      description: The tool call and arguments, or the CLI command.
+      render: shell
+
+  - type: textarea
+    id: audit
+    attributes:
+      label: Relevant audit lines
+      description: From stderr. Redact anything customer-identifying.
+      render: json
+
+  - type: input
+    id: environment
+    attributes:
+      label: Node version, OS, AWS region
+      placeholder: Node 22.9 / macOS 15 / sa-east-1
+
+  - type: checkboxes
+    id: check
+    attributes:
+      label: Before filing
+      options:
+        - label: I ran `--check` and it reported the region I expected
+        - label: If a search returned nothing, I confirmed fleet indexing with `describe_indexing_configuration`

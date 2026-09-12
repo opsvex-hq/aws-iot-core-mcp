@@ -1,0 +1,8 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Security vulnerability
+    url: https://github.com/opsvex-hq/aws-iot-core-mcp/blob/main/SECURITY.md
+    about: Do not open a public issue. Email hola@opsvex.com.
+  - name: Have someone operate this layer for you
+    url: https://opsvex.com
+    about: Opsvex runs monitoring, IoT telemetry and cloud operations as a service.
