@@ -63,8 +63,8 @@
     "prepublishOnly": "npm run verify && npm run build"
   },
   "dependencies": {
-    "@aws-sdk/client-iot": "^3.1131.0",
-    "@aws-sdk/client-iot-data-plane": "^3.1131.0",
+    "@aws-sdk/client-iot": "^3.1141.0",
+    "@aws-sdk/client-iot-data-plane": "^3.1141.0",
     "@modelcontextprotocol/sdk": "^1.30.0",
     "zod": "^4.6.2"
   },
