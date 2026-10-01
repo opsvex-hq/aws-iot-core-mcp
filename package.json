@@ -65,7 +65,7 @@
   "dependencies": {
     "@aws-sdk/client-iot": "^3.1131.0",
     "@aws-sdk/client-iot-data-plane": "^3.1131.0",
-    "@modelcontextprotocol/sdk": "^1.30.0",
+    "@modelcontextprotocol/sdk": "^1.30.1",
     "zod": "^4.6.2"
   },
   "devDependencies": {
